@@ -1,0 +1,35 @@
+import example.*
+
+
+const Tomas = new Usuario(mensajes = [],chats = [], notificaciones = [], espacioLibre = 200, nombre = "Tomas")
+const Nicky = new Usuario(mensajes = [],chats = [], notificaciones = [], espacioLibre = 200, nombre = "Nicky")
+const unChat = new Chat(participantes = [])
+const unMensaje = new Mensaje(usuarioQueLoEnvio = Tomas,contenido = unTexto)
+const unTexto = new Texto(texto = "Asdasd")
+
+describe "Test de consulta"{
+	test "El participante esta en el chat"{
+		unChat.agregarIntegrante(Tomas)
+		assert.equals(true,unChat.elUsuarioEstaEntreLosParticipantes(Tomas))
+	}
+}
+describe "Test de accion"{
+	test "Enviar un mensaje"{
+		unChat.agregarIntegrante(Tomas)
+		unChat.agregarIntegrante(Nicky)
+		Tomas.enviarMensaje(unMensaje,unChat)
+		assert.equals(true,Nicky.tieneElMensaje(unMensaje))
+	}
+}
+describe "Test de falla"{
+	test "Enviar un mensaje falla por que el usuario no esta en el chat"{
+		unChat.agregarIntegrante(Nicky)
+		assert.throwsExceptionWithMessage("No se puede enviar el mensaje",{Tomas.enviarMensaje(unMensaje,unChat)})
+	}
+}
+
+
+
+
+
+
